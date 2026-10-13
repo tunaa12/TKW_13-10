@@ -1,0 +1,39 @@
+/* ==========================================================
+   style.css - CSS BỔ SUNG cho phần Tailwind chưa hỗ trợ sẵn
+   (Tailwind Play CDN không có font tuỳ biến / @keyframes riêng,
+    nên viết thêm ở đây)
+   ========================================================== */
+
+/* 1) Font logo tuỳ biến (Pacifico từ Google Fonts), có font dự phòng
+      nếu mất mạng. Dùng như class: <a class="font-logo"> */
+.font-logo {
+  font-family: "Pacifico", "Brush Script MT", cursive;
+}
+
+/* 2) Cuộn mượt khi bấm link neo (#menu, #story...) */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 3) Chừa khoảng trống khi cuộn tới section, để header sticky
+      không che mất tiêu đề */
+section[id],
+aside[id] {
+  scroll-margin-top: 90px;
+}
+
+/* 4) ANIMATION TUỲ BIẾN (Tailwind CDN không có sẵn):
+      hiệu ứng "hiện dần + trượt lên" cho thông báo gửi form */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.4s ease-out both;
+}
+
+/* Tôn trọng người dùng bật "giảm chuyển động" trong hệ điều hành */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .animate-fade-up { animation: none; }
+}

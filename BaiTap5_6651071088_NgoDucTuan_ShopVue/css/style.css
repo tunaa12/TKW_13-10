@@ -1,0 +1,43 @@
+/* ==========================================================
+   style.css - CSS tuỳ biến cho Bài 5 (nạp SAU Bootstrap để override)
+   ========================================================== */
+
+/* Cuộn mượt khi bấm link neo trên menu */
+html { scroll-behavior: smooth; }
+
+/* Override .btn-primary của Bootstrap: đổi sang xanh đậm hơn */
+.btn-primary {
+  --bs-btn-bg: #1d4ed8;
+  --bs-btn-border-color: #1d4ed8;
+  --bs-btn-hover-bg: #1e40af;
+  --bs-btn-hover-border-color: #1e40af;
+  --bs-btn-active-bg: #1e3a8a;
+  --bs-btn-active-border-color: #1e3a8a;
+}
+.text-primary { color: #1d4ed8 !important; }
+
+/* Card sản phẩm: bo góc nhiều hơn + hiệu ứng nổi khi rê chuột */
+.product-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.12);
+}
+.product-card .card-img-top { background: #eef2f8; }
+
+/* Khung giỏ hàng: bo góc, nền nhẹ; dính theo khi cuộn trên desktop */
+.cart-panel {
+  border-radius: 1rem;
+  top: 5rem; /* chừa chỗ cho header sticky */
+}
+
+/* Banner khuyến mãi dùng gradient xanh - tím */
+.promo {
+  background: linear-gradient(90deg, #2563eb, #7c3aed);
+}
+
+/* Chừa chỗ cho header sticky khi nhảy tới section bằng link neo */
+section[id], aside[id] { scroll-margin-top: 80px; }
