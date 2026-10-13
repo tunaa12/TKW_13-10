@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 14 - Light và Dark Theme</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: #222;
+            color: #fff;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.light {
+            background-color: #fff;
+            color: #222;
+        }
+
+        .container {
+            max-width: 500px;
+            padding: 25px;
+            border: 1px solid #888;
+            border-radius: 12px;
+        }
+
+        .switch {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .switch input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Chuyển đổi giao diện</h2>
+
+        <label class="switch">
+            <input type="checkbox" id="themeToggle">
+            <span id="themeStatus">Off - Dark Mode</span>
+        </label>
+
+        <p>Đây là nội dung mẫu của trang web.</p>
+        <p>Bật hoặc tắt nút để thay đổi giao diện.</p>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#themeToggle').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $('body').addClass('light');
+                    $('#themeStatus').text('On - Light Mode');
+                } else {
+                    $('body').removeClass('light');
+                    $('#themeStatus').text('Off - Dark Mode');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

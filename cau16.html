@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 16 - Thêm và xóa hàng</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 12px;
+        }
+
+        input {
+            padding: 8px;
+            width: 260px;
+            max-width: 100%;
+        }
+
+        button {
+            padding: 9px 14px;
+            margin: 5px 5px 12px 0;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        th, td {
+            border: 1px solid #999;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background: #eaeaea;
+        }
+
+        tbody tr {
+            cursor: pointer;
+        }
+
+        tbody tr.selected {
+            background: #cce5ff;
+        }
+
+        #message {
+            margin: 12px 0;
+            color: #c00;
+        }
+    </style>
+</head>
+<body>
+    <h2>Quản lý thông tin</h2>
+
+    <div class="form-group">
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" placeholder="Nhập họ tên">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" placeholder="Nhập email">
+    </div>
+
+    <div class="form-group">
+        <label for="birthdate">Birthdate:</label><br>
+        <input type="text" id="birthdate"
+               placeholder="dd/mm/yyyy">
+    </div>
+
+    <button type="button" id="addRow">Add Row</button>
+    <button type="button" id="deleteRow">Delete Row</button>
+
+    <p id="message" role="status" aria-live="polite"></p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Birthdate</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            <tr>
+                <td>Nguyen Van A</td>
+                <td>a@example.com</td>
+                <td>15/05/2004</td>
+            </tr>
+            <tr>
+                <td>Tran Thi B</td>
+                <td>b@example.com</td>
+                <td>20/08/2003</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        $(document).ready(function () {
+            // Kiểm tra định dạng email cơ bản
+            function validEmail(email) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+            }
+
+            // Kiểm tra ngày theo định dạng dd/mm/yyyy
+            // Đồng thời đảm bảo ngày, tháng, năm có tồn tại.
+            function validDate(value) {
+                const match = value.match(
+                    /^(0[1-9]|[12]\d|3[01])\/(0[1-9]|1[0-2])\/(\d{4})$/
+                );
+
+                if (!match) return false;
+
+                const day = Number(match[1]);
+                const month = Number(match[2]);
+                const year = Number(match[3]);
+
+                const date = new Date(year, month - 1, day);
+
+                return date.getFullYear() === year &&
+                       date.getMonth() === month - 1 &&
+                       date.getDate() === day;
+            }
+
+            // Thêm hàng
+            $('#addRow').on('click', function () {
+                const name = $('#name').val().trim();
+                const email = $('#email').val().trim();
+                const birthdate = $('#birthdate').val().trim();
+
+                if (!name || !email || !birthdate) {
+                    $('#message').text('Vui lòng nhập đầy đủ thông tin.');
+                    return;
+                }
+
+                if (!validEmail(email)) {
+                    $('#message').text('Email không đúng định dạng.');
+                    $('#email').focus();
+                    return;
+                }
+
+                if (!validDate(birthdate)) {
+                    $('#message').text(
+                        'Ngày sinh không hợp lệ. Hãy nhập dd/mm/yyyy.'
+                    );
+                    $('#birthdate').focus();
+                    return;
+                }
+
+                // Dùng text() để hiển thị dữ liệu an toàn
+                const row = $('<tr></tr>');
+
+                $('<td></td>').text(name).appendTo(row);
+                $('<td></td>').text(email).appendTo(row);
+                $('<td></td>').text(birthdate).appendTo(row);
+
+                $('#tableBody').append(row);
+
+                $('#name, #email, #birthdate').val('');
+                $('#message').text('Thêm hàng thành công.');
+            });
+
+            // Chọn một hàng bằng cách click
+            $('#tableBody').on('click', 'tr', function () {
+                $(this).toggleClass('selected');
+            });
+
+            // Xóa các hàng đang được chọn
+            $('#deleteRow').on('click', function () {
+                const selectedRows = $('#tableBody tr.selected');
+
+                if (selectedRows.length === 0) {
+                    $('#message').text('Vui lòng chọn hàng cần xóa.');
+                    return;
+                }
+
+                selectedRows.remove();
+                $('#message').text('Đã xóa các hàng được chọn.');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 17 - Accordion</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f5f5f5;
+        }
+
+        .accordion {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .accordion-title {
+            background: #e8e8e8;
+            padding: 16px;
+            cursor: pointer;
+            border-bottom: 1px solid #ccc;
+            font-size: 17px;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+
+        .accordion-title:hover {
+            background: #d8e8f8;
+        }
+
+        .accordion-title.active {
+            background: #2878d0;
+            color: white;
+        }
+
+        .accordion-content {
+            display: none;
+            padding: 18px;
+            border-bottom: 1px solid #ccc;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <h2 style="text-align: center;">Accordion bằng jQuery</h2>
+
+    <div class="accordion">
+        <div class="accordion-title">Phần 1: HTML là gì?</div>
+        <div class="accordion-content">
+            HTML là ngôn ngữ đánh dấu được sử dụng để xây dựng
+            cấu trúc và nội dung của trang web.
+        </div>
+
+        <div class="accordion-title">Phần 2: CSS là gì?</div>
+        <div class="accordion-content">
+            CSS được sử dụng để định dạng giao diện, màu sắc,
+            bố cục và kiểu hiển thị của trang web.
+        </div>
+
+        <div class="accordion-title">Phần 3: JavaScript là gì?</div>
+        <div class="accordion-content">
+            JavaScript giúp trang web xử lý sự kiện và tạo
+            các chức năng tương tác với người dùng.
+        </div>
+
+        <div class="accordion-title">Phần 4: jQuery là gì?</div>
+        <div class="accordion-content">
+            jQuery là thư viện JavaScript giúp thao tác DOM,
+            xử lý sự kiện và tạo hiệu ứng dễ dàng hơn.
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.accordion-title').on('click', function () {
+                const content = $(this).next('.accordion-content');
+                const isOpen = content.is(':visible');
+
+                // Đóng tất cả nội dung và bỏ trạng thái active
+                $('.accordion-content').stop(true, true).slideUp(200);
+                $('.accordion-title').removeClass('active');
+
+                // Nếu mục vừa nhấn đang đóng thì mở nó
+                if (!isOpen) {
+                    content.stop(true, true).slideDown(200);
+                    $(this).addClass('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

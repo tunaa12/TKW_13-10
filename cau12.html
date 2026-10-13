@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 12 - Passport và Credit Card</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: inline-block;
+            min-width: 120px;
+        }
+
+        input[type="text"] {
+            padding: 8px;
+            margin-top: 8px;
+            width: 250px;
+        }
+
+        .detail {
+            display: none;
+            margin: 10px 0 0 124px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Thông tin cá nhân</h2>
+
+    <div class="form-group">
+        <label>Passport:</label>
+        <label><input type="radio" name="passport" value="yes"> Yes</label>
+        <label><input type="radio" name="passport" value="no" checked> No</label>
+
+        <div id="passportDetail" class="detail">
+            <input type="text" id="passportNumber"
+                   placeholder="Nhập số Passport">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Credit Card:</label>
+        <label><input type="radio" name="credit" value="yes"> Yes</label>
+        <label><input type="radio" name="credit" value="no" checked> No</label>
+
+        <div id="creditDetail" class="detail">
+            <input type="text" id="creditNumber"
+                   placeholder="Nhập thông tin thẻ">
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('input[name="passport"]').on('change', function () {
+                if ($(this).val() === 'yes') {
+                    $('#passportDetail').slideDown();
+                } else {
+                    $('#passportDetail').slideUp();
+                    $('#passportNumber').val('');
+                }
+            });
+
+            $('input[name="credit"]').on('change', function () {
+                if ($(this).val() === 'yes') {
+                    $('#creditDetail').slideDown();
+                } else {
+                    $('#creditDetail').slideUp();
+                    $('#creditNumber').val('');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

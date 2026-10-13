@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu 15 - Tabs</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        .tabs {
+            max-width: 650px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .tab-buttons {
+            display: flex;
+            background: #f1f1f1;
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 14px 10px;
+            border: none;
+            border-right: 1px solid #ddd;
+            cursor: pointer;
+            font-size: 16px;
+            background: #f1f1f1;
+        }
+
+        .tab-button:last-child {
+            border-right: none;
+        }
+
+        .tab-button:hover {
+            background: #ddd;
+        }
+
+        .tab-button.active {
+            background: #2878d0;
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 22px;
+            min-height: 150px;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h2>Ví dụ Tabs</h2>
+
+    <div class="tabs">
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="tab1">
+                Trang chủ
+            </button>
+
+            <button class="tab-button" data-tab="tab2">
+                Giới thiệu
+            </button>
+
+            <button class="tab-button" data-tab="tab3">
+                Liên hệ
+            </button>
+        </div>
+
+        <div id="tab1" class="tab-content active">
+            <h3>Trang chủ</h3>
+            <p>Đây là nội dung của trang chủ.</p>
+        </div>
+
+        <div id="tab2" class="tab-content">
+            <h3>Giới thiệu</h3>
+            <p>Đây là nội dung giới thiệu về website.</p>
+        </div>
+
+        <div id="tab3" class="tab-content">
+            <h3>Liên hệ</h3>
+            <p>Email: example@gmail.com</p>
+            <p>Điện thoại: 0123456789</p>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('.tab-button').on('click', function () {
+                const tabId = $(this).data('tab');
+
+                $('.tab-button').removeClass('active');
+                $(this).addClass('active');
+
+                $('.tab-content').stop(true, true).hide()
+                    .removeClass('active');
+
+                $('#' + tabId).fadeIn(200).addClass('active');
+            });
+        });
+    </script>
+</body>
+</html>
